@@ -1,1 +1,34 @@
 aws-ses-send provides basic capability to send an email using SES.  Credentials can either be passed in (not recommend) or set per ASWS documentation in environment variables or in the credentials file.
+
+install: npm install bsh-aws-ses-send
+
+usage:
+
+var sendEmail = require ('bsh-aws-ses-send');
+
+sendEmail (sourceAddress, toAddresses, ccAddresses, bccAddresses, subject, textBody, htmlBody, awsRegion, credentialsProfile).then (function(successVal) {}, function(failVal) {});
+
+WHERE:
+
+sourceAddress : The required source email address you have configured with AWS SES (specific email or possibly any email@domain)
+
+toAddresses: An optional array of to email addresses (null otherwise)
+
+ccAddresses: An optional array of cc email addresses (null otherwise)
+
+bccAddresses: An optional array of bcc email addresses (null otherwise)
+
+subject: The required subject line
+
+textBody: The optional text body 
+
+htmlBody: The optional body in HTML format
+
+awsRegion:  A required AWS region, as a string 
+
+credentialsProfile:  An optional credentials profile (such as 'default') that AWS will use to find your credentials, in the credentials file (see AWS)
+
+successVal:  The SES resposne on success (Implement a success function body potentially using this)
+
+failVal:  The SES err (Implement a failure function body potentially using this)
+
