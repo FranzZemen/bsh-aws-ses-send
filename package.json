@@ -2,7 +2,7 @@
   "name": "aws-ses-send",
   "version": "0.1.0",
   "description": "Send an email using Amazon AWS SES with your credentials in AWS environment variables, in the Credentials file, or passed by argument.  Returns a Promise.",
-  "main": "bsh/aws/aws-ses-send.js",
+  "main": "bsh/aws/bsh-aws-ses-send.js",
   "dependencies": {
     "aws-sdk": "^2.0.27",
     "promise": "^6.0.1",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/FranzZemen/aws-ses-send.git"
+    "url": "https://github.com/FranzZemen/bsh-aws-ses-send.git"
   },
   "keywords": [
     "SES"
@@ -22,7 +22,7 @@
   "author": "Franz Zemen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/FranzZemen/aws-ses-send/issues"
+    "url": "https://github.com/FranzZemen/bsh-aws-ses-send/issues"
   },
-  "homepage": "https://github.com/FranzZemen/aws-ses-send"
+  "homepage": "https://github.com/FranzZemen/bsh-aws-ses-send"
 }
