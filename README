@@ -1,0 +1,1 @@
+aws-ses-send provides basic capability to send an email using SES.  Credentials can either be passed in (not recommend) or set per ASWS documentation in environment variables or in the credentials file.
