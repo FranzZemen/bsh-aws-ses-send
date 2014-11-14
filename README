@@ -1,34 +1,55 @@
 aws-ses-send provides basic capability to send an email using SES.  Credentials can either be passed in (not recommend) or set per ASWS documentation in environment variables or in the credentials file.
 
+=====
+
 install: npm install bsh-aws-ses-send
+
+=====
 
 usage:
 
-var sendEmail = require ('bsh-aws-ses-send');
-
-sendEmail (sourceAddress, toAddresses, ccAddresses, bccAddresses, subject, textBody, htmlBody, awsRegion, credentialsProfile).then (function(successVal) {}, function(failVal) {});
+var sendEmail = require ('bsh-aws-ses-send')(region, credentialsProfile, accessKeys);
 
 WHERE:
 
-sourceAddress : The required source email address you have configured with AWS SES (specific email or possibly any email@domain)
+sendEmail is a function that returns a Promise
 
-toAddresses: An optional array of to email addresses (null otherwise)
+region = AWS region (string) - required
 
-ccAddresses: An optional array of cc email addresses (null otherwise)
+credentialsProfile = AWS profile in the AWS credentials file - optional
 
-bccAddresses: An optional array of bcc email addresses (null otherwise)
+accessKeys = {accessKeyId: 'your access key', secretAccessKey: 'your secret access key'} - optional
 
-subject: The required subject line
+If you don't provide credentialsProfile or accessKeys, the module will attempt to load access keys from
+the environment using AWS environment parameters:
 
-textBody: The optional text body 
+AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
 
-htmlBody: The optional body in HTML format
+                OR
 
-awsRegion:  A required AWS region, as a string 
+AMAZON_ACCESS_KEY_ID AMAZON_SECRET_ACCESS_KEY
 
-credentialsProfile:  An optional credentials profile (such as 'default') that AWS will use to find your credentials, in the credentials file (see AWS)
+The returned Promise's success value is the AWS return object, which is often of little interest.
+The returned Promise's failure value is either a validation Error or an AWS error object
 
-successVal:  The SES resposne on success (Implement a success function body potentially using this)
+=====
 
-failVal:  The SES err (Implement a failure function body potentially using this)
+Invoke sendMail as follows:
 
+sendMail(email).then(function(successVal) {
+    // Success code
+}, function(errorVal) {
+    // Error code
+});
+
+
+WHERE:
+
+ var email = {from:'from email address', // required
+          toAddresses: ['toAddress1','toAddress2'],  // optional
+          ccAddresses: ['toAddress1','toAddress2'],  // optional
+          bccAddresses: ['toAddress1','toAddress2'], // optional
+          subject: 'subject', // required
+          textBody: 'textBody', // optional
+          htmlBody:  'htmlBody' // optional
+  };

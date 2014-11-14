@@ -2,47 +2,45 @@
  * Created by Franz on 11/13/2014.
  */
 
-var sendEmail = require('./aws-ses-send');
+var sendEmail = require('./aws-ses-send')('us-west-2','default');
 var should = require('should');
 
 describe('Sending email', function () {
     it ('should send the email', function (done) {
-        sendEmail(
-            '<enter valid AWS source email address',
-            ['<enter one or more email addresses'],
-            null,
-            null,
-            'test email 1',
-            'Hello World',
-            '<b>Hello World</b>',
-            'us-west-2',
-            'default').then(function (successVal) {
+        var email = {
+            from: '<enter valid AWS source email address>',
+            toAddresses: ['<enter one or more email addresses>'],
+            // ccAddresses : [], // Optional
+            // bccAddresses : [], //Optional
+            subject: 'test email 1',
+            textBody: 'Hello World',
+            htmlBody: '<b>Hello World</b>'
+        };
+        sendEmail(email).then(function (successVal) {
                 successVal.should.be.ok;
                 successVal.ResponseMetadata.should.be.ok;
                 successVal.MessageId.should.be.ok;
                 done();
             }, function (err) {
                 err.should.not.be.ok;
-                console.log(err);
                 done();
             });
     });
     it ('should not send the email', function (done) {
-        sendEmail(
-            null,
-            ['franzzemen@gmail.com'],
-            null,
-            null,
-            'test email 2',
-            'Hello World',
-            '<b>Hello World</b>',
-            'us-west-2',
-            'default').then(function (successVal) {
+        var email = {
+            //from: '<enter valid AWS source email address>', // Create a null condition
+            toAddresses: ['<enter one or more email addresses'],
+            // ccAddresses : [], // Optional
+            // bccAddresses : [], //Optional
+            subject: 'test email 1',
+            textBody: 'Hello World',
+            htmlBody: '<b>Hello World</b>'
+        };
+        sendEmail(email).then(function (successVal) {
                 successVal.should.not.be.ok;
                 done();
             }, function (err) {
                 err.should.be.ok;
-                console.log(err);
                 done();
             });
     });
