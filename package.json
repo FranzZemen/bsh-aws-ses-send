@@ -2,7 +2,7 @@
   "name": "bsh-aws-ses-send",
   "version": "0.2.2",
   "description": "Send an email using Amazon AWS SES with your credentials in AWS environment variables, in the Credentials file, or passed by argument.  Returns a Promise.",
-  "main": "bsh/aws/bsh-aws-ses-send.js",
+  "main": "bsh-aws-ses-send.js",
   "dependencies": {
     "aws-sdk": "^2.0.27",
     "promise": "^6.0.1",
@@ -10,7 +10,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "mocha bsh/aws"
+    "test": "mocha ./"
   },
   "repository": {
     "type": "git",
